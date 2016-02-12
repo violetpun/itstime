@@ -1,6 +1,6 @@
 /*
- * @Author Abel
- * Grammar definition for VML Language
+ * @Author Violet, modifying Abel's VML code
+ * Grammar definition for TML Language
  */
 
 grammar tml;
@@ -11,7 +11,7 @@ method 						: type ID LPAREN (parameter (COMMA parameter)*)? RPAREN LCBRACK sta
 
 parameter					: type ID ;
 
-type						: (INT | VM);
+type						: (INT | Class);
 
 extendedType				: type | FUT LT type GT;
 
@@ -19,28 +19,31 @@ statementList				: statement*;
 
 statement					: varDecl 
 							| assignment 
-							| ifStmt		 					
-							| returnStmt 					
-							| release ;
+							| ifStmt	
+							| jobStmt	 					
+							| returnStmt ;							 					
+//							| release ;
 							
 assignment					: (extendedType? ID) ASSIGN sideEffectExp SEMI;							
 							
 varDecl 					: extendedType ID SEMI;
 
+jobStmt						: JOB LPAREN exp RPAREN;
+
 returnStmt 					: RETURN exp SEMI;
 
-release						: RELEASE ID SEMI;
+//release						: RELEASE ID SEMI;
 							
 sideEffectExp				: exp							
 							| asyncInvoc
-							| sync		
-							| acquire;
+							| sync;		
+//							| acquire;
 							
 asyncInvoc					: receiver=exp BANG ID LPAREN (exp (COMMA exp)*)? RPAREN;
 
 sync						: exp DOT SYNC;
 
-acquire						: NEW VM LPAREN RPAREN;							
+//acquire						: NEW VM LPAREN RPAREN;							
 							
 ifStmt						: IF LPAREN exp RPAREN LCBRACK thenBranch=statementList RCBRACK ELSE LCBRACK elseBranch=statementList RCBRACK  #ifMultiple
 							| IF LPAREN exp RPAREN s1=statement ELSE s2=statement														   #ifSingle	
@@ -83,7 +86,8 @@ SEMI    : ';';
 
 NEW     : 'new';
 
-VM      : 'VM';
+Class   : 'Class';
+//VM      : 'VM';
 DOT     : '.';
 //NULL    : 'null';
 //TRUE    : 'true';
@@ -95,6 +99,7 @@ FUT		: 'Fut';
 THIS	: 'this';
 IF		: 'if';
 ELSE	: 'else';
+JOB		: 'job';
 RETURN	: 'return';
 
 //BOOL    : 'Bool';
