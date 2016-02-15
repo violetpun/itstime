@@ -5,15 +5,15 @@
 
 grammar tml;
 
-program						: method* LCBRACK statement* RCBRACK;
+program						: method* LCBRACK statement* RCBRACK WITH NUMBER;
 
 method 						: type ID LPAREN (parameter (COMMA parameter)*)? RPAREN LCBRACK statementList RCBRACK;
 
 parameter					: type ID ;
 
-type						: (INT | Class);
+type						: INT | CLASS;
 
-extendedType				: type | FUT LT type GT;
+extendedType				: type | FUT LT (type)? GT;
 
 statementList				: statement*;
 
@@ -28,7 +28,7 @@ assignment					: (extendedType? ID) ASSIGN sideEffectExp SEMI;
 							
 varDecl 					: extendedType ID SEMI;
 
-jobStmt						: JOB LPAREN exp RPAREN;
+jobStmt						: JOB LPAREN exp RPAREN SEMI;
 
 returnStmt 					: RETURN exp SEMI;
 
@@ -36,12 +36,21 @@ returnStmt 					: RETURN exp SEMI;
 							
 sideEffectExp				: exp							
 							| asyncInvoc
-							| sync;		
+							| syncInvoc
+							| sync
+							| newcog
+							| newlocal;		
 //							| acquire;
 							
 asyncInvoc					: receiver=exp BANG ID LPAREN (exp (COMMA exp)*)? RPAREN;
 
+syncInvoc					: receiver=exp DOT ID LPAREN (exp (COMMA exp)*)? RPAREN;
+
 sync						: exp DOT SYNC;
+
+newcog						: NEW CLASS WITH exp;
+
+newlocal					: NEW LOCAL CLASS;
 
 //acquire						: NEW VM LPAREN RPAREN;							
 							
@@ -59,6 +68,7 @@ exp							: exp1=exp (op=(EQUALS | DISTINCT | LEG | GEG | LT | GT) exp2=exp) 		#
 							| ID 																	#varExp
 							| LPAREN exp RPAREN 													#enclosingExp
 							| THIS																	#thisExp	
+							| THIS DOT CAPACITY														#thisCapacity
 							;
         //TOKENS
 LPAREN  : '(';
@@ -86,17 +96,20 @@ SEMI    : ';';
 
 NEW     : 'new';
 
-Class   : 'Class';
+CLASS   : 'Class';
+LOCAL	: 'local';
 //VM      : 'VM';
 DOT     : '.';
 //NULL    : 'null';
 //TRUE    : 'true';
 //FALSE   : 'false';
-RELEASE : 'release';
+//RELEASE : 'release';
+WITH	: 'with';
 SYNC    : 'get';
 INT     : 'Int';
 FUT		: 'Fut';
 THIS	: 'this';
+CAPACITY: 'capacity';
 IF		: 'if';
 ELSE	: 'else';
 JOB		: 'job';

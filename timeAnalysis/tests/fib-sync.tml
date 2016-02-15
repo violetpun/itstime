@@ -1,0 +1,17 @@
+Int fib(Int n) {
+	if (n<=1) { return 1; }
+	else { 
+		job(1) ;
+		Fut<Int> f = this ! fib(n-1) ; 
+		Fut<Int> g = this ! fib(n-2) ; 
+		Int m1 = f.get ; 
+		Int m2 = g.get ;
+		return m1 + m2 ; }
+}
+
+// Main block:
+{ 
+	Int x = 1 ;
+	Class y = new Class with x ; 
+	Int m = x!fib(5) ;
+} with 1

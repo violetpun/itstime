@@ -12,11 +12,11 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface tmlVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link tmlParser#release}.
+	 * Visit a parse tree produced by {@link tmlParser#newlocal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRelease(@NotNull tmlParser.ReleaseContext ctx);
+	T visitNewlocal(@NotNull tmlParser.NewlocalContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link tmlParser#program}.
 	 * @param ctx the parse tree
@@ -36,12 +36,6 @@ public interface tmlVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitType(@NotNull tmlParser.TypeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link tmlParser#acquire}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAcquire(@NotNull tmlParser.AcquireContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code varExp}
 	 * labeled alternative in {@link tmlParser#exp}.
@@ -101,6 +95,12 @@ public interface tmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValueExp(@NotNull tmlParser.ValueExpContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link tmlParser#newcog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNewcog(@NotNull tmlParser.NewcogContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link tmlParser#method}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -126,11 +126,30 @@ public interface tmlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReturnStmt(@NotNull tmlParser.ReturnStmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link tmlParser#syncInvoc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSyncInvoc(@NotNull tmlParser.SyncInvocContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code thisCapacity}
+	 * labeled alternative in {@link tmlParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThisCapacity(@NotNull tmlParser.ThisCapacityContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link tmlParser#sync}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSync(@NotNull tmlParser.SyncContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link tmlParser#jobStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobStmt(@NotNull tmlParser.JobStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ifSingle}
 	 * labeled alternative in {@link tmlParser#ifStmt}.

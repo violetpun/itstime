@@ -4,3 +4,9 @@
 /vmlParser.java
 /vmlBaseVisitor.java
 /vmlVisitor.java
+/tml.tokens
+/tmlBaseVisitor.java
+/tmlLexer.java
+/tmlLexer.tokens
+/tmlParser.java
+/tmlVisitor.java

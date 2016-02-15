@@ -18,7 +18,7 @@ public class tmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements tm
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRelease(@NotNull tmlParser.ReleaseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNewlocal(@NotNull tmlParser.NewlocalContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -40,13 +40,6 @@ public class tmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements tm
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitType(@NotNull tmlParser.TypeContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitAcquire(@NotNull tmlParser.AcquireContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -116,6 +109,13 @@ public class tmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements tm
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitNewcog(@NotNull tmlParser.NewcogContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitMethod(@NotNull tmlParser.MethodContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -144,7 +144,28 @@ public class tmlBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements tm
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitSyncInvoc(@NotNull tmlParser.SyncInvocContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitThisCapacity(@NotNull tmlParser.ThisCapacityContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitSync(@NotNull tmlParser.SyncContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJobStmt(@NotNull tmlParser.JobStmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

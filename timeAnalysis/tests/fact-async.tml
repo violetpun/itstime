@@ -1,0 +1,18 @@
+Int fact(Int n) {
+  if (n==0) {return 1 ; }
+  else {
+  	Class x = new Class with 2 ;
+  	Fut<Int> f = x!fact(n-1) ;
+  	job(n) ;
+  	Int m = f.get ; 
+  	return m*n ;
+  }
+}
+
+
+
+{
+   Class x = new Class with 2;
+   Fut<Int> f = x!fact(5);
+   Int m = f.get;
+} with 1

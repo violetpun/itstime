@@ -1,0 +1,34 @@
+// Main block:
+{
+	Class o1 = new Class with 1 ;
+	Class o2 = new Class with 1 ;
+	Class o3 = new Class with 1 ;
+	Class o4 = new Class with 1 ;
+	Fut<Int> f1 = o1!m1(o2, o4) ;
+	Fut<Int> f2 = o2!m2(o4) ;
+	Fut<Int> f3 = o3!m1(o2, o4) ;
+	job(5) ;
+	Int a = f1.get ;
+	Int b = f2.get ;
+	Int c = f3.get ;
+} with 1 ;
+
+Int m1(Class x, Class y) {
+	Fut<Int> f = x!m2(y) ;
+	job(6) ;
+	Int a = f.get ;
+	return 0 ;
+}
+
+Int m2(Class x) {
+	Fut<Int> f = x!m3(4) ;
+	job(3) ;
+	Int a = f.get ;
+	return 0 ;
+}
+
+Int m3(Int n) {
+	job(n) ;
+	return 0 ;
+}
+
