@@ -5,7 +5,9 @@
 
 grammar tml;
 
-program						: method* LCBRACK statement* RCBRACK WITH NUMBER;
+program						: method* LCBRACK statement* RCBRACK ;
+
+//program						: method* LCBRACK statement* RCBRACK WITH NUMBER;
 
 method 						: type ID LPAREN (parameter (COMMA parameter)*)? RPAREN LCBRACK statementList RCBRACK;
 
@@ -36,7 +38,7 @@ returnStmt 					: RETURN exp SEMI;
 							
 sideEffectExp				: exp							
 							| asyncInvoc
-							| syncInvoc
+							| syncInvoc  //not so important at the moment
 							| sync
 							| newcog
 							| newlocal;		
