@@ -146,8 +146,8 @@ public class BTMethod extends BType {
 		}else if(type instanceof BTConditional){
 			BTConditional cond = (BTConditional)type;
 			UpdateR(cond.sequence, methodBehaviors);
-		}else if(type instanceof BTInvoc){
-			BTInvoc invoc = (BTInvoc)type;
+		}else if(type instanceof BTAsyncInvoc){
+			BTAsyncInvoc invoc = (BTAsyncInvoc)type;
 			BTMethod called = methodBehaviors.get(invoc.getMethodCall().getMethodId());
 			HashSet<String> currentCalledR = called.getReleases();
 			//if the ith formal argument of the called method is released then add to the 

@@ -106,6 +106,13 @@ public class TmlVisitorImpl
     return new TmlStmtIf(cond, stmtsThen, stmtsElse);
   }
   
+  public TmlElementBase visitJobStmt(tmlParser.JobStmtContext ctx)
+  {
+	  TmlExpBase exp = (TmlExpBase)visit(ctx.exp());
+	  
+	  return new TmlStmtJob(exp);
+  }
+  
   public TmlElementBase visitReturnStmt(tmlParser.ReturnStmtContext ctx)
   {
     TmlExpBase exp = (TmlExpBase)visit(ctx.exp());
@@ -128,7 +135,7 @@ public class TmlVisitorImpl
     for (tmlParser.ExpContext e : ctx.exp()) {
       all.add((TmlExpBase)visit(e));
     }
-    return new TmlExpInvoke(ctx.ID().getText(), (TmlExpBase)all.get(0), all.subList(1, all.size()));
+    return new TmlExpAsyncInvoke(ctx.ID().getText(), (TmlExpBase)all.get(0), all.subList(1, all.size()));
   }
   
   public TmlElementBase visitSync(tmlParser.SyncContext ctx)
@@ -152,6 +159,7 @@ public class TmlVisitorImpl
   public TmlElementBase visitNewcog(tmlParser.NewcogContext ctx)
   {
     TmlExpBase exp = (TmlExpBase)visit(ctx.exp());
+    assert exp != null;
     return new TmlExpNewcog(exp);
   }
   
@@ -198,6 +206,11 @@ public class TmlVisitorImpl
   public TmlElementBase visitThisExp(tmlParser.ThisExpContext ctx)
   {
     return new TmlExpThis();
+  }
+  
+  public TmlElementBase visitThisExpCapacity(tmlParser.ThisExpContext ctx)
+  {
+    return new TmlExpThisCapacity();
   }
 }
 

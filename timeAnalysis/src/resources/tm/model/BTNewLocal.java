@@ -17,19 +17,22 @@ import resources.util.Strings;
  */
 public class BTNewLocal extends BTAtom {
 
-	String vmId;
+	String tmId;
+	Exp capacity;
 	
 	/**
-	 * @param vmId: The id of the vm being released
-	 * @param statesEnv: The states of the related Vms
+	 * @param capacity 
+	 * @param tmId: The id of the tm being released
+	 * @param statesEnv: The states of the related Tms
 	 */
-	public BTNewLocal(String vmId) {
-		this.vmId = vmId;		
+	public BTNewLocal(String tmId, Exp capacity) {
+		this.tmId = tmId;		
+		this.capacity = capacity;
 	}
 
 	
 	/* (non-Javadoc)
-	 * @see resources.vm.model.BType#translate(resources.vm.model.DeltaSubstitution, resources.vm.model.EnvTranslation, java.lang.String, resources.vm.model.CostSequence)
+	 * @see resources.tm.model.BType#translate(resources.tm.model.DeltaSubstitution, resources.tm.model.EnvTranslation, java.lang.String, resources.tm.model.CostSequence)
 	 */
 //	comment out for the translation at the moment
 	@Override
@@ -37,16 +40,16 @@ public class BTNewLocal extends BTAtom {
 		
 //		//TODO: check this carefully
 //		if(!carrierValue.equals(Strings.VMBot))
-//			env.vmValues.put(vmId, new ValVmExt(new LinkedList<String>(), Strings.VMTop));
+//			env.TmValues.put(vmId, new ValTmExt(new LinkedList<String>(), Strings.VMTop));
 //		
 //		//create a copy of the costs to avoid modifying the argument
 //		CostSequence newCost = cost.clone();
 //		
 //		//Apply delta transformation to current states
-//		HashMap<String, ValVmExt> actualStates = env.mergeVmValues(delta);
+//		HashMap<String, ValTmExt> actualStates = env.mergeTmValues(delta);
 //		
 //		//build cost element expression by substituting the id of the vm being released
-//		CostElement costExp = new CostNew(new ValVmExt(carrierValue));
+//		CostElement costExp = new CostNew(new ValTmExt(carrierValue));
 //		
 //		//add the cost expression to the cost list
 //		newCost.addCost(costExp);
@@ -61,7 +64,8 @@ public class BTNewLocal extends BTAtom {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "new local " + this.vmId + ";\n";
+//		return "new local " + this.tmId + ";\n";
+		return Strings.CurrentCog + "[" + this.capacity + "];\n";
 	}
 
 }

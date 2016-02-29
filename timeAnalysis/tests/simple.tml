@@ -6,7 +6,8 @@ Int m(Int n) {
 }
 
 Int n(Int n) {
-	/*job(n) ;*/
+    Class y = new Class with this ; 	
+	job(n) ;
   	return 0 ;
 }
 

@@ -5,9 +5,9 @@ import java.util.List;
 import resources.tm.model.Exp;
 import resources.util.Strings;
 
-public class TmlExpThis extends TmlExpBase {
+public class TmlExpThisCapacity extends TmlExpBase {
 
-	public TmlExpThis() {
+	public TmlExpThisCapacity() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,7 +37,7 @@ public class TmlExpThis extends TmlExpBase {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return Strings.CurrentCog;
+		return Strings.thisCap;
 	}
 
 }

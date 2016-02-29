@@ -6,9 +6,10 @@ import java.util.List;
 //import resources.tm.model.BTAcquire;
 import resources.tm.model.BTNewCog;
 import resources.tm.model.BTNewLocal;
-import resources.tm.model.BTInvoc;
+import resources.tm.model.BTAsyncInvoc;
 import resources.tm.model.BType;
 import resources.tm.model.ValMethodCall;
+import resources.util.Strings;
 
 public class TmlStmtAssignment extends TmlStatement {
 
@@ -42,27 +43,35 @@ public class TmlStmtAssignment extends TmlStatement {
 	}
 
 	@Override
-	public BType inferBehavior() throws Exception {
+	public BType inferBehavior(TmlExpBase localCapacity) throws Exception {
 		
 //		if(exp instanceof TmlExpNew){
 		if(exp instanceof TmlExpNewcog){
 			//if it is an object in a _new_ cog, then generate an new-cog behavior (same as in the VM paper)
-			return new BTNewCog(varId, ((TmlExpNewcog) exp).capacity.toBehavioralExp());
+			if (Strings.CurrentCog.equals(((TmlExpNewcog) exp).capacity.toString())) {			
+				System.out.println(((TmlExpNewcog) exp).capacity.toString());
+				return new BTNewCog(varId, localCapacity.toBehavioralExp());
+			}
+				else {
+					System.out.println("else " + localCapacity);	
+					System.out.println(((TmlExpNewcog) exp).capacity.toString());
+				return new BTNewCog(varId, ((TmlExpNewcog) exp).capacity.toBehavioralExp());
+			}
 		}else if(exp instanceof TmlExpNewlocal){
 			//if it is an object in a _old_ cog, then generate a cog behavior with the capacity of the current cog
-			return new BTNewLocal(varId);
-		} else if(exp instanceof TmlExpInvoke){
+			return new BTNewLocal(varId, localCapacity.toBehavioralExp());
+		} else if(exp instanceof TmlExpAsyncInvoke){
 			//if it is a method invocation then generate the call
 			//TODO notice that arguments are treated as String
-			TmlExpInvoke tmlExpInvoke = (TmlExpInvoke)exp;
+			TmlExpAsyncInvoke tmlExpAsyncInvoke = (TmlExpAsyncInvoke)exp;
 			
 			List<String> arguments = new LinkedList<String>();
-			arguments.add(tmlExpInvoke.receiver.toString());
-			for(TmlExpBase e : tmlExpInvoke.arguments)
+			arguments.add(tmlExpAsyncInvoke.receiver.toString()+"[TO-DO]");
+			for(TmlExpBase e : tmlExpAsyncInvoke.arguments)
 				arguments.add(e.toString());
 						
-			ValMethodCall call = new ValMethodCall(tmlExpInvoke.name, arguments);
-			return new BTInvoc(varId, call);
+			ValMethodCall call = new ValMethodCall(tmlExpAsyncInvoke.name, arguments);
+			return new BTAsyncInvoc(varId, call);
 		}else{
 			return exp.inferBehavior();
 		}

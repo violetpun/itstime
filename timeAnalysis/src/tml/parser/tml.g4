@@ -69,8 +69,8 @@ exp							: exp1=exp (op=(EQUALS | DISTINCT | LEG | GEG | LT | GT) exp2=exp) 		#
 							| NUMBER 																#valueExp
 							| ID 																	#varExp
 							| LPAREN exp RPAREN 													#enclosingExp
+							| CAPACITY														#thisCapacity
 							| THIS																	#thisExp	
-							| THIS DOT CAPACITY														#thisCapacity
 							;
         //TOKENS
 LPAREN  : '(';

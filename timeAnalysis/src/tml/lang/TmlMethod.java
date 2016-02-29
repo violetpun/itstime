@@ -18,11 +18,12 @@ import resources.util.Strings;
  */
 public class TmlMethod extends TmlElementBase {
 
+	String localCapacity = "C";
 	private String name;
-	TmlExpBase capacity;
+	TmlExpBase capacity = new TmlExpVar(localCapacity);
 	List<TmlArgument> arguments; 
 	TmlStmtSeq body;
-	String returnType;
+	String returnType; 
 
 	
 	boolean isMain = false;
@@ -99,15 +100,15 @@ public class TmlMethod extends TmlElementBase {
 	public BType inferBehavior() throws Exception {
 		List<String> releases = new LinkedList<String>();
 		List<String> plainArguments = new LinkedList<String>();
-		plainArguments.add(Strings.CurrentCog);
+		plainArguments.add(Strings.CurrentCog + "[" + capacity + "]");
 		if(!isMain){
 			for(TmlArgument e : arguments)
 				plainArguments.add(e.id);
 			
-			return new BTMethod(name, plainArguments, body.inferBehavior(), returnType, releases );
+			return new BTMethod(name, plainArguments, body.inferBehavior(capacity), returnType, releases );
 		}else{
 			assert capacity != null;
-			return new BTMethod(capacity.toBehavioralExp(), body.inferBehavior());
+			return new BTMethod(capacity.toBehavioralExp(), body.inferBehavior(capacity));
 		}
 	}
 

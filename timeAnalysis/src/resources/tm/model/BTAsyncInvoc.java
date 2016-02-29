@@ -15,7 +15,7 @@ import resources.util.Strings;
  * @author Abel
  * Represents the creation of a future by a method invocation
  */
-public class BTInvoc extends BTAtom {
+public class BTAsyncInvoc extends BTAtom {
 
 	String futureId;
 	ValMethodCall methodCall;
@@ -24,7 +24,7 @@ public class BTInvoc extends BTAtom {
 	 * @param futureId
 	 * @param methodCall
 	 */
-	public BTInvoc(String futureId, ValMethodCall methodCall) {
+	public BTAsyncInvoc(String futureId, ValMethodCall methodCall) {
 		this.futureId = futureId;
 		this.methodCall = methodCall;
 	}

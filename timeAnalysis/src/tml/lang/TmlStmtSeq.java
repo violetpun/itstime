@@ -46,18 +46,20 @@ public class TmlStmtSeq extends TmlStatement {
 	 * @see tml.lang.TmlElementBase#inferBehavior()
 	 */
 	@Override
-	public BType inferBehavior() throws Exception {
-		if(stmts.size() > 0)
-			return inferBehavior(stmts);
+	public BType inferBehavior(TmlExpBase localCapacity) throws Exception {
+		if(stmts.size() > 0) 
+			return inferBehavior(stmts, localCapacity);
 		return new BTSkip();
 	}
 
-	private BType inferBehavior(List<TmlStatement> stmts) throws Exception{
-		if(stmts.size() == 1)
-			return stmts.get(0).inferBehavior();
+	private BType inferBehavior(List<TmlStatement> stmts, TmlExpBase localCapacity) throws Exception{
+		if(stmts.size() == 1){
+			return stmts.get(0).inferBehavior(localCapacity);
+		}
+			
 		
 		//TODO add a try catch?
-		BTAtom atom = (BTAtom)stmts.get(0).inferBehavior();
-		return new BTSequence(atom, inferBehavior(stmts.subList(1, stmts.size())));
+		BTAtom atom = (BTAtom)stmts.get(0).inferBehavior(localCapacity);
+		return new BTSequence(atom, inferBehavior(stmts.subList(1, stmts.size()), localCapacity));
 	}
 }

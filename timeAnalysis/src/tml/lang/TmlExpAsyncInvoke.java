@@ -5,13 +5,13 @@ import java.util.List;
 import resources.tm.model.BType;
 import resources.tm.model.Exp;
 
-public class TmlExpInvoke extends TmlExpBase {
+public class TmlExpAsyncInvoke extends TmlExpBase {
 
 	TmlExpBase receiver;
 	String name;
 	List<TmlExpBase> arguments;
 	
-	public TmlExpInvoke(String name, TmlExpBase receiver, List<TmlExpBase> arguments) {
+	public TmlExpAsyncInvoke(String name, TmlExpBase receiver, List<TmlExpBase> arguments) {
 		this.name = name;
 		this.receiver = receiver;
 		this.arguments = arguments;

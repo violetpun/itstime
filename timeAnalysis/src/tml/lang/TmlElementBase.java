@@ -36,4 +36,10 @@ public abstract class TmlElementBase {
 		return new BTSkip();
 	}
 
+
+	public BType inferBehavior(TmlExpBase capacity) throws Exception {
+		// TODO Auto-generated method stub
+		return new BTSkip();
+	}
+
 }

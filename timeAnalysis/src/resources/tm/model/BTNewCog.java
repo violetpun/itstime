@@ -34,7 +34,7 @@ public class BTNewCog extends BTAtom {
 	/* (non-Javadoc)
 	 * @see resources.vm.model.BType#translate(resources.vm.model.DeltaSubstitution, resources.vm.model.EnvTranslation, java.lang.String, resources.vm.model.CostSequence)
 	 */
-//	comment out for the translation at the moment
+//	VP: comment out for the translation at the moment
 	@Override
 	public List<CostSequence> translate(DeltaSubstitution delta, EnvTranslation env, String carrierValue, CostSequence cost) {
 		
