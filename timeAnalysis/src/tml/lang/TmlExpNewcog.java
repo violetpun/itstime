@@ -16,13 +16,13 @@ import resources.util.Strings;
  */
 public class TmlExpNewcog extends TmlExpBase {
 	
-	TmlExpBase capcity;
+	TmlExpBase capacity;
 	
 	/**
 	 * 
 	 */
 	public TmlExpNewcog(TmlExpBase exp) {
-		this.capcity = exp;
+		this.capacity = exp;
 	}
 
 	/* (non-Javadoc)
@@ -36,7 +36,7 @@ public class TmlExpNewcog extends TmlExpBase {
 	
 	public TmlExpBase getCogCapacity() {
 		// TODO Auto-generated method stub
-		return this.capcity;
+		return this.capacity;
 	}
 
 	/* (non-Javadoc)

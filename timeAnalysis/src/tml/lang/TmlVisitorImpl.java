@@ -31,7 +31,10 @@ public class TmlVisitorImpl
     for (tmlParser.StatementContext sc : ctx.statement()) {
       mainStmts.add((TmlStatement)visitStatement(sc));
     }
-    program.addMain(mainStmts);
+    
+    TmlExpBase mainCap = new TmlExpInt(Integer.parseInt(ctx.NUMBER().getText())) ;
+//    System.out.println(mainCap);
+    program.addMain(mainStmts, mainCap);
     
     return program;
   }
@@ -149,7 +152,6 @@ public class TmlVisitorImpl
   public TmlElementBase visitNewcog(tmlParser.NewcogContext ctx)
   {
     TmlExpBase exp = (TmlExpBase)visit(ctx.exp());
-//    TmlExpBase with = (TmlExpBase)visit(ctx.WITH());
     return new TmlExpNewcog(exp);
   }
   

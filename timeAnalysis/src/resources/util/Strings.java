@@ -45,6 +45,7 @@ public class Strings {
 	public static final String MainMethodName = "$MAIN";
 	public static final String CurrentVM = "THISVM";
 	public static final String CurrentCog = "THISCOG";
+
 	
 	
 	

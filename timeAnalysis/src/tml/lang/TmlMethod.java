@@ -19,9 +19,11 @@ import resources.util.Strings;
 public class TmlMethod extends TmlElementBase {
 
 	private String name;
+	TmlExpBase capacity;
 	List<TmlArgument> arguments; 
 	TmlStmtSeq body;
 	String returnType;
+
 	
 	boolean isMain = false;
 	
@@ -40,11 +42,24 @@ public class TmlMethod extends TmlElementBase {
 		this.returnType = returnType;
 	}
 	
-	public TmlMethod(String methodName, List<TmlArgument> arguments,
+	/*
+	 * With capacity
+	 */
+	public TmlMethod(String methodName, TmlExpBase methodCapacity, List<TmlArgument> arguments,
+			List<TmlStatement> stmts, String returnType) {
+		setName(methodName);
+		setCapacity(methodCapacity);
+		this.arguments = arguments;
+		body = new TmlStmtSeq(stmts);
+		this.returnType = returnType;
+	}
+	
+	public TmlMethod(String methodName, TmlExpBase methodCapacity, List<TmlArgument> arguments,
 			List<TmlStatement> stmts, String returnType, boolean isMain) {
-		this(methodName, arguments, stmts, returnType);
+		this(methodName, methodCapacity, arguments, stmts, returnType);
 		this.isMain = isMain;
 	}
+
 
 	public String getName() {
 		return name;
@@ -52,6 +67,14 @@ public class TmlMethod extends TmlElementBase {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public TmlExpBase getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(TmlExpBase capacity) {
+		this.capacity = capacity;
 	}
 
 	/* (non-Javadoc)
@@ -83,7 +106,8 @@ public class TmlMethod extends TmlElementBase {
 			
 			return new BTMethod(name, plainArguments, body.inferBehavior(), returnType, releases );
 		}else{
-			return new BTMethod(body.inferBehavior());
+			assert capacity != null;
+			return new BTMethod(capacity.toBehavioralExp(), body.inferBehavior());
 		}
 	}
 

@@ -51,9 +51,9 @@ public class TmlProgram extends TmlElementBase {
 		}
 	}
 
-	public void addMain(List<TmlStatement> mainStmts) {
+	public void addMain(List<TmlStatement> mainStmts, TmlExpBase mainCap) {
 		// TODO Auto-generated method stub
-		methods.put(Strings.MainMethodName, new TmlMethod(Strings.MainMethodName, null, mainStmts, "_", true));
+		methods.put(Strings.MainMethodName, new TmlMethod(Strings.MainMethodName, mainCap, null, mainStmts, "_", true));
 	}
 	
 	@Override

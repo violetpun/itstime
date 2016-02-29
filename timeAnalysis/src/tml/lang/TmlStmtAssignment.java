@@ -47,7 +47,7 @@ public class TmlStmtAssignment extends TmlStatement {
 //		if(exp instanceof TmlExpNew){
 		if(exp instanceof TmlExpNewcog){
 			//if it is an object in a _new_ cog, then generate an new-cog behavior (same as in the VM paper)
-			return new BTNewCog(varId, ((TmlExpNewcog) exp).capcity.toBehavioralExp());
+			return new BTNewCog(varId, ((TmlExpNewcog) exp).capacity.toBehavioralExp());
 		}else if(exp instanceof TmlExpNewlocal){
 			//if it is an object in a _old_ cog, then generate a cog behavior with the capacity of the current cog
 			return new BTNewLocal(varId);

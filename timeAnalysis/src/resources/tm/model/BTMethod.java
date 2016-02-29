@@ -1,7 +1,7 @@
 /**
- * Resource analisys for VML contracts V 1.0
- * Developed by Abel Garcia
- * 2015
+ * Time analysis for TML contracts 
+ * Developed by Violet Pun, modifying codes from Abel Garcia
+ * 2016
  */
 package resources.tm.model;
 
@@ -11,15 +11,17 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import resources.util.Strings;
 
 
 /**
- * @author Abel
- * Represents the method declaration
+ * @author Violet
+ * Represents the acquire operation
  */
 public class BTMethod extends BType {
 
 	String methodId;
+	Exp capacity;
 	List<String> arguments;
 	BType bodyBehavior;
 	String returnValue;
@@ -34,7 +36,7 @@ public class BTMethod extends BType {
 	 * @param arguments: List of formal arguments, first argument is always the carrierID (this), in the context of the method
 	 * @param bodyBehavior: Behavioral Type of the body
 	 * @param returnValue: The return value is either a VM name or a '_' representing a value type
-	 * @param releases: The list of vm names in the arguments that are released by this method
+	 * @param releases: The list of tm names in the arguments that are released by this method
 	 */
 	public BTMethod(String methodId, List<String> arguments,
 			BType bodyBehavior, String returnValue, List<String> releases) {
@@ -45,15 +47,28 @@ public class BTMethod extends BType {
 		this.releases = releases!=null? new HashSet<String>(releases):new HashSet<String>();
 	}
 	
+	/*
+	 * For main with capacity, and no release
+	 */	
+	public BTMethod(String methodId, Exp capacity, List<String> arguments, BType bodyBehavior, String returnValue) {
+		this.methodId = methodId;
+		this.capacity = capacity;
+		this.arguments = arguments;
+		this.bodyBehavior = bodyBehavior;
+		this.returnValue = returnValue;
+	}
+	
 	
 	/**
 	 * Intended for the Main Method
 	 * @param bodyBehavior: The main behavior
 	 */
-	public BTMethod(BType bodyBehavior) { 
-		this("", null, bodyBehavior, "",  null);
+	public BTMethod(Exp capacity, BType bodyBehavior) { 
+		this("", capacity, null, bodyBehavior, "");
 		isMain = true;
 	}
+
+
 
 	public String getMethodId() {
 		return methodId;
@@ -86,7 +101,7 @@ public class BTMethod extends BType {
 
 
 	/* (non-Javadoc)
-	 * @see resources.vm.model.BType#translate(resources.vm.model.DeltaSubstitution, resources.vm.model.EnvTranslation, java.lang.String, resources.vm.model.CostSequence)
+	 * @see resources.tm.model.BType#translate(resources.tm.model.DeltaSubstitution, resources.tm.model.EnvTranslation, java.lang.String, resources.tm.model.CostSequence)
 	 */
 	@Override
 	public List<CostSequence> translate(DeltaSubstitution delta, EnvTranslation env, String carrierValue, CostSequence cost) {
@@ -99,7 +114,7 @@ public class BTMethod extends BType {
 	@Override
 	public String toString() {
 		if(isMain){
-			return "{\n" + bodyBehavior + "}";
+			return "main( " + Strings.MainCog  + "[" + this.capacity + "] ){\n" + bodyBehavior + "}";
 		}
 		
 		List<String> formalArgs = new LinkedList<String>(arguments) ;
@@ -131,10 +146,6 @@ public class BTMethod extends BType {
 		}else if(type instanceof BTConditional){
 			BTConditional cond = (BTConditional)type;
 			UpdateR(cond.sequence, methodBehaviors);
-		}else if(type instanceof BTRelease){
-			BTRelease rel = (BTRelease)type;
-			if(arguments.contains(rel.vmId)) //TODO check if the object being released is a formal parameter otherwise we don't care?
-				releases.add(rel.vmId);
 		}else if(type instanceof BTInvoc){
 			BTInvoc invoc = (BTInvoc)type;
 			BTMethod called = methodBehaviors.get(invoc.getMethodCall().getMethodId());

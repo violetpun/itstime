@@ -1,6 +1,12 @@
 Int m(Int n) {
 	Class y = new Class with 2 ;
+	Int x = y!n(1) ;
   	/*job(n) ;*/
+  	return 0 ;
+}
+
+Int n(Int n) {
+	/*job(n) ;*/
   	return 0 ;
 }
 
