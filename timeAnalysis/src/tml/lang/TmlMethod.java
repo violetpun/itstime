@@ -76,7 +76,7 @@ public class TmlMethod extends TmlElementBase {
 	public BType inferBehavior() throws Exception {
 		List<String> releases = new LinkedList<String>();
 		List<String> plainArguments = new LinkedList<String>();
-		plainArguments.add(Strings.CurrentVM);
+		plainArguments.add(Strings.CurrentCog);
 		if(!isMain){
 			for(TmlArgument e : arguments)
 				plainArguments.add(e.id);

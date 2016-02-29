@@ -31,6 +31,7 @@ public class Strings {
 	public static final String VMBot = "BOT";
 	public static final String VMPart = "PART";
 	public static final String VMMain = "MAINVM";
+	public static final String MainCog = "MAINCOG";
 	
 	public static final String DownArrow = "!";
 	public static final String PeakModifier = "peak";
@@ -38,11 +39,12 @@ public class Strings {
 	
 	public static final String TypeInt = "Int";
 	public static final String TypeVM = "VM";
-	public static final String TypeCog = "VM";			//for object in a new cog
-	public static final String TypeObj = "VM";			//for object in local cog
+	public static final String TypeCog = "NewVM";			//for object in a new cog
+	public static final String TypeObj = "LocalVM";			//for object in local cog
 	public static final String TypeFuture = "Fut";
 	public static final String MainMethodName = "$MAIN";
 	public static final String CurrentVM = "THISVM";
+	public static final String CurrentCog = "THISCOG";
 	
 	
 	

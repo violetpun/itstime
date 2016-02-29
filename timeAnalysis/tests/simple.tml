@@ -1,14 +1,14 @@
+Int m(Int n) {
+	Class y = new Class with 2 ;
+  	/*job(n) ;*/
+  	return 0 ;
+}
+
+
 {
    Int x = 1 ;
    Class y1 = new Class with 8 ;
    Class y2 = new local Class;
    Class y3 = new Class with 1;
    
-}
-
-/*
-Int m(Int n) {
-  	job(n) ;
-  	return 0 ;
-}
-*/
+} with 10

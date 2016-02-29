@@ -5,7 +5,7 @@
 
 grammar tml;
 
-program						: method* LCBRACK statement* RCBRACK ;
+program						: method* LCBRACK statement* RCBRACK WITH NUMBER;
 
 //program						: method* LCBRACK statement* RCBRACK WITH NUMBER;
 

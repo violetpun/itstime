@@ -6,7 +6,9 @@ import java.util.List;
 import tml.parser.tmlBaseVisitor;
 import tml.parser.tmlParser;
 import tml.lang.TmlElementBase;
-import tml.lang.TmlExpNew;
+//import tml.lang.TmlExpNew;
+import tml.lang.TmlExpNewlocal;
+import tml.lang.TmlExpNewcog;
 import tml.parser.tmlParser;
 
 
@@ -137,7 +139,7 @@ public class TmlVisitorImpl
    * For creating an object in the local cog
    */
   public TmlElementBase visitNewlocal(tmlParser.NewlocalContext ctx)
-  {
+  {	    
     return new TmlExpNewlocal();
   }
   
@@ -146,7 +148,9 @@ public class TmlVisitorImpl
    */
   public TmlElementBase visitNewcog(tmlParser.NewcogContext ctx)
   {
-    return new TmlExpNewcog();
+    TmlExpBase exp = (TmlExpBase)visit(ctx.exp());
+//    TmlExpBase with = (TmlExpBase)visit(ctx.WITH());
+    return new TmlExpNewcog(exp);
   }
   
 //  public TmlElementBase visitAcquire(tmlParser.AcquireContext ctx)

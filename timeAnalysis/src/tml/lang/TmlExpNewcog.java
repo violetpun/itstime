@@ -15,12 +15,14 @@ import resources.util.Strings;
  *
  */
 public class TmlExpNewcog extends TmlExpBase {
-
+	
+	TmlExpBase capcity;
+	
 	/**
 	 * 
 	 */
-	public TmlExpNewcog() {
-		// TODO Auto-generated constructor stub
+	public TmlExpNewcog(TmlExpBase exp) {
+		this.capcity = exp;
 	}
 
 	/* (non-Javadoc)
@@ -30,6 +32,11 @@ public class TmlExpNewcog extends TmlExpBase {
 	public String getExpressionType() {
 		// TODO Auto-generated method stub
 		return Strings.TypeCog;
+	}
+	
+	public TmlExpBase getCogCapacity() {
+		// TODO Auto-generated method stub
+		return this.capcity;
 	}
 
 	/* (non-Javadoc)
