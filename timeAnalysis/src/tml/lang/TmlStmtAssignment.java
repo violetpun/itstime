@@ -48,13 +48,13 @@ public class TmlStmtAssignment extends TmlStatement {
 //		if(exp instanceof TmlExpNew){
 		if(exp instanceof TmlExpNewcog){
 			//if it is an object in a _new_ cog, then generate an new-cog behavior (same as in the VM paper)
-			if (Strings.CurrentCog.equals(((TmlExpNewcog) exp).capacity.toString())) {			
-				System.out.println(((TmlExpNewcog) exp).capacity.toString());
+			if (Strings.thisCap.equals(((TmlExpNewcog) exp).capacity.toString())) {			
+//				System.out.println(((TmlExpNewcog) exp).capacity.toString());
 				return new BTNewCog(varId, localCapacity.toBehavioralExp());
 			}
 				else {
-					System.out.println("else " + localCapacity);	
-					System.out.println(((TmlExpNewcog) exp).capacity.toString());
+//					System.out.println("else " + localCapacity);	
+//					System.out.println(((TmlExpNewcog) exp).capacity.toString());
 				return new BTNewCog(varId, ((TmlExpNewcog) exp).capacity.toBehavioralExp());
 			}
 		}else if(exp instanceof TmlExpNewlocal){

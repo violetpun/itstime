@@ -50,7 +50,7 @@ syncInvoc					: receiver=exp DOT ID LPAREN (exp (COMMA exp)*)? RPAREN;
 
 sync						: exp DOT SYNC;
 
-newcog						: NEW CLASS WITH exp;
+newcog						: NEW CLASS WITH exp ;
 
 newlocal					: NEW LOCAL CLASS;
 
@@ -69,7 +69,7 @@ exp							: exp1=exp (op=(EQUALS | DISTINCT | LEG | GEG | LT | GT) exp2=exp) 		#
 							| NUMBER 																#valueExp
 							| ID 																	#varExp
 							| LPAREN exp RPAREN 													#enclosingExp
-							| CAPACITY														#thisCapacity
+							| CAPACITY														        #thisCapacity
 							| THIS																	#thisExp	
 							;
         //TOKENS
@@ -112,6 +112,7 @@ INT     : 'Int';
 FUT		: 'Fut';
 THIS	: 'this';
 CAPACITY: 'capacity';
+//THISCAPACITY: 'this.capacity' ;
 IF		: 'if';
 ELSE	: 'else';
 JOB		: 'job';

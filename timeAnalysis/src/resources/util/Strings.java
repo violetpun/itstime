@@ -46,7 +46,7 @@ public class Strings {
 	public static final String CurrentVM = "THISVM";
 	public static final String CurrentCog = "THISCOG";
 	public static final String CurrentCap = "C";
-	public static final String thisCap = "this.Capacity";
+	public static final String thisCap = "THISCAPACITY";
 
 	
 	
