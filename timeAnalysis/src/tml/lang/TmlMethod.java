@@ -35,6 +35,7 @@ public class TmlMethod extends TmlElementBase {
 		// TODO Auto-generated constructor stub
 	}
 
+	// for methods which are not Main (no capacity)
 	public TmlMethod(String methodName, List<TmlArgument> arguments,
 			List<TmlStatement> stmts, String returnType) {
 		setName(methodName);
@@ -44,7 +45,7 @@ public class TmlMethod extends TmlElementBase {
 	}
 	
 	/*
-	 * With capacity
+	 * Main With capacity
 	 */
 	public TmlMethod(String methodName, TmlExpBase methodCapacity, List<TmlArgument> arguments,
 			List<TmlStatement> stmts, String returnType) {
@@ -55,6 +56,7 @@ public class TmlMethod extends TmlElementBase {
 		this.returnType = returnType;
 	}
 	
+	//If the method is Main
 	public TmlMethod(String methodName, TmlExpBase methodCapacity, List<TmlArgument> arguments,
 			List<TmlStatement> stmts, String returnType, boolean isMain) {
 		this(methodName, methodCapacity, arguments, stmts, returnType);

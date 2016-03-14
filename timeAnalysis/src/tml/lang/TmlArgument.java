@@ -17,6 +17,7 @@ public class TmlArgument extends TmlElementBase {
 
 	String type;
 	String id;
+	String capacity = "0";
 	
 	/**
 	 * 
@@ -25,6 +26,12 @@ public class TmlArgument extends TmlElementBase {
 		this.type = type;
 		this.id = id;
 	}
+	
+	public TmlArgument(String type, String id, String capacity) {
+		this.type = type;
+		this.id = id;
+		this.capacity = capacity;
+	}	
 
 	/* (non-Javadoc)
 	 * @see tml.lang.TmlElementBase#checkSemantics()
