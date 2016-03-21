@@ -5,9 +5,12 @@
  */
 package tml.lang;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import resources.tm.model.BTAtom;
+import resources.tm.model.BTNewCog;
+import resources.tm.model.BTNewLocal;
 import resources.tm.model.BTSequence;
 import resources.tm.model.BTSkip;
 import resources.tm.model.BType;
@@ -19,6 +22,7 @@ import resources.tm.model.BType;
 public class TmlStmtSeq extends TmlStatement {
 
 	List<TmlStatement> stmts;
+	List<BTAtom> existingCogs = new LinkedList<BTAtom>() ;
 	public List<TmlStatement> getStmts() {
 		return stmts;
 	}
@@ -48,18 +52,33 @@ public class TmlStmtSeq extends TmlStatement {
 	@Override
 	public BType inferBehavior(TmlExpBase localCapacity) throws Exception {
 		if(stmts.size() > 0) 
-			return inferBehavior(stmts, localCapacity);
+			return inferBehavior(stmts, localCapacity, existingCogs);
 		return new BTSkip();
 	}
 
-	private BType inferBehavior(List<TmlStatement> stmts, TmlExpBase localCapacity) throws Exception{
+	private BType inferBehavior(List<TmlStatement> stmts, TmlExpBase localCapacity, List<BTAtom> existingCogs) throws Exception{
 		if(stmts.size() == 1){
-			return stmts.get(0).inferBehavior(localCapacity);
+			if (stmts.get(0).inferBehavior(localCapacity) instanceof BTNewCog)
+				System.out.println(stmts.get(0).inferBehavior(localCapacity).toString());
+			return stmts.get(0).inferBehavior(localCapacity, existingCogs);
 		}
 			
 		
 		//TODO add a try catch?
-		BTAtom atom = (BTAtom)stmts.get(0).inferBehavior(localCapacity);
-		return new BTSequence(atom, inferBehavior(stmts.subList(1, stmts.size()), localCapacity));
+		BTAtom atom = (BTAtom)stmts.get(0).inferBehavior(localCapacity, existingCogs);
+		if (atom instanceof BTNewCog || atom instanceof BTNewLocal){
+			existingCogs.add(atom);
+			if (atom instanceof BTNewCog){
+				System.out.println(((BTNewCog) atom).cogId);
+				System.out.println(existingCogs.indexOf(((BTNewCog) atom).cogId.toString()));
+			}
+				
+			if(atom instanceof BTNewLocal){
+				System.out.println(((BTNewLocal) atom).cogId);
+				System.out.println(existingCogs.indexOf(((BTNewLocal) atom).cogId.toString()));
+			}
+				
+		}			
+		return new BTSequence(atom, inferBehavior(stmts.subList(1, stmts.size()), localCapacity, existingCogs));
 	}
 }

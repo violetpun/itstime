@@ -18,7 +18,8 @@ import resources.util.Strings;
 public class BTNewLocal extends BTAtom {
 
 	String tmId;
-	Exp capacity;
+	public Exp capacity;
+	public String cogId = Strings.CurrentCog;
 	
 	/**
 	 * @param capacity 
@@ -65,7 +66,7 @@ public class BTNewLocal extends BTAtom {
 	public String toString() {
 		// TODO Auto-generated method stub
 //		return "new local " + this.tmId + ";\n";
-		return Strings.CurrentCog + "[" + this.capacity + "];\n";
+		return "new local object " + this.tmId + " " + this.cogId + "[" + this.capacity + "];\n";
 	}
 
 }

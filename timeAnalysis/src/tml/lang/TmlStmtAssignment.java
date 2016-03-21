@@ -8,6 +8,7 @@ import resources.tm.model.BTNewCog;
 import resources.tm.model.BTNewLocal;
 import resources.tm.model.BTAsyncInvoc;
 import resources.tm.model.BType;
+import resources.tm.model.BTAtom;
 import resources.tm.model.ValMethodCall;
 import resources.util.Strings;
 
@@ -43,7 +44,7 @@ public class TmlStmtAssignment extends TmlStatement {
 	}
 
 	@Override
-	public BType inferBehavior(TmlExpBase localCapacity) throws Exception {
+	public BType inferBehavior(TmlExpBase localCapacity, List<BTAtom> cogSets) throws Exception {
 		
 //		if(exp instanceof TmlExpNew){
 		if(exp instanceof TmlExpNewcog){
@@ -65,6 +66,7 @@ public class TmlStmtAssignment extends TmlStatement {
 			//TODO notice that arguments are treated as String
 			TmlExpAsyncInvoke tmlExpAsyncInvoke = (TmlExpAsyncInvoke)exp;
 			
+			System.out.println(cogSets.indexOf(tmlExpAsyncInvoke.receiver.toString())) ;
 			List<String> arguments = new LinkedList<String>();
 			arguments.add(tmlExpAsyncInvoke.receiver.toString()+"[TO-DO]");
 			for(TmlExpBase e : tmlExpAsyncInvoke.arguments)

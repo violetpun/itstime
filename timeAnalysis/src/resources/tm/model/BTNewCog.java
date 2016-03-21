@@ -18,8 +18,8 @@ import resources.util.Strings;
  */
 public class BTNewCog extends BTAtom {
 
-	String cogId;
-	Exp capacity;
+	public String cogId;
+	public Exp capacity;
 	
 	/**
 	 * @param cogId: The id of the cog which is newly created
