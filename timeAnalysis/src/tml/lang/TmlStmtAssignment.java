@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 //import resources.tm.model.BTAcquire;
+//import resources.tm.model.BTCog;
 import resources.tm.model.BTNewCog;
 import resources.tm.model.BTNewLocal;
 import resources.tm.model.BTAsyncInvoc;
@@ -66,7 +67,13 @@ public class TmlStmtAssignment extends TmlStatement {
 			//TODO notice that arguments are treated as String
 			TmlExpAsyncInvoke tmlExpAsyncInvoke = (TmlExpAsyncInvoke)exp;
 			
-			System.out.println(cogSets.indexOf(tmlExpAsyncInvoke.receiver.toString())) ;
+			System.out.println(tmlExpAsyncInvoke.receiver.toString());
+//			for(BTAtom cog : cogSets) {
+//				if(cog.cogId != tmlExpAsyncInvoke.receiver.toString())
+//					System.out.println("hit");
+//				else	
+//					System.out.println("miss");
+//			}
 			List<String> arguments = new LinkedList<String>();
 			arguments.add(tmlExpAsyncInvoke.receiver.toString()+"[TO-DO]");
 			for(TmlExpBase e : tmlExpAsyncInvoke.arguments)

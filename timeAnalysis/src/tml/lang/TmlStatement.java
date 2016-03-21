@@ -8,6 +8,7 @@ package tml.lang;
 import java.util.List;
 
 import resources.tm.model.BTAtom;
+//import resources.tm.model.BTCog;
 import resources.tm.model.BTSkip;
 import resources.tm.model.BType;
 
@@ -29,7 +30,7 @@ public abstract class TmlStatement extends TmlElementBase {
 		return new BTSkip();
 	}
 
-	public BType inferBehavior(TmlExpBase localCapacity, List<BTAtom> cogSets) throws Exception {
+	public BType inferBehavior(TmlExpBase localCapacity, List<BTAtom> existingCogs) throws Exception {
 		// TODO Auto-generated method stub
 		return new BTSkip();
 	}

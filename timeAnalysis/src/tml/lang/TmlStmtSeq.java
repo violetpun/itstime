@@ -70,12 +70,12 @@ public class TmlStmtSeq extends TmlStatement {
 			existingCogs.add(atom);
 			if (atom instanceof BTNewCog){
 				System.out.println(((BTNewCog) atom).cogId);
-				System.out.println(existingCogs.indexOf(((BTNewCog) atom).cogId.toString()));
+//				System.out.println(existingCogs.indexOf(((BTNewCog) atom).cogId.toString()));
 			}
 				
 			if(atom instanceof BTNewLocal){
 				System.out.println(((BTNewLocal) atom).cogId);
-				System.out.println(existingCogs.indexOf(((BTNewLocal) atom).cogId.toString()));
+//				System.out.println(existingCogs.indexOf(((BTNewLocal) atom).cogId.toString()));
 			}
 				
 		}			

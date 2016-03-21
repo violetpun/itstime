@@ -8,6 +8,7 @@ package tml.lang;
 import java.util.List;
 
 import resources.tm.model.BTAtom;
+//import resources.tm.model.BTCog;
 import resources.tm.model.BTSkip;
 import resources.tm.model.BType;
 
