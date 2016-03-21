@@ -17,7 +17,7 @@ import resources.util.Strings;
  */
 public class BTNewLocal extends BTAtom {
 
-	String tmId;
+	public String objId;
 	public Exp capacity;
 	public String cogId = Strings.CurrentCog;
 	
@@ -27,7 +27,7 @@ public class BTNewLocal extends BTAtom {
 	 * @param statesEnv: The states of the related Tms
 	 */
 	public BTNewLocal(String tmId, Exp capacity) {
-		this.tmId = tmId;		
+		this.objId = tmId;		
 		this.capacity = capacity;
 	}
 
@@ -66,7 +66,7 @@ public class BTNewLocal extends BTAtom {
 	public String toString() {
 		// TODO Auto-generated method stub
 //		return "new local " + this.tmId + ";\n";
-		return "new local object " + this.tmId + " " + this.cogId + "[" + this.capacity + "];\n";
+		return "new local object " + this.objId + " " + this.cogId + "[" + this.capacity + "];\n";
 	}
 
 }

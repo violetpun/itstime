@@ -31,6 +31,11 @@ public class BTNewCog extends BTAtom {
 	}
 
 	
+	public BTNewCog() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	/* (non-Javadoc)
 	 * @see resources.vm.model.BType#translate(resources.vm.model.DeltaSubstitution, resources.vm.model.EnvTranslation, java.lang.String, resources.vm.model.CostSequence)
 	 */

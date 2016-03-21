@@ -7,6 +7,7 @@ package tml.lang;
 
 import java.util.List;
 
+import resources.tm.model.BTAtom;
 import resources.tm.model.BTJob;
 import resources.tm.model.BType;
 
@@ -39,7 +40,7 @@ public class TmlStmtJob extends TmlStatement {
 	}
 	
 	@Override
-	public BType inferBehavior(TmlExpBase capacity) throws Exception {
+	public BType inferBehavior(TmlExpBase capacity, List<BTAtom> existingCogs) throws Exception {
 		
 		return new BTJob(this.exp.toBehavioralExp(), capacity.toBehavioralExp());
 		

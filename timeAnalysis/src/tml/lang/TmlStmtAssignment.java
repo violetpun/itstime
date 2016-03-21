@@ -7,6 +7,7 @@ import java.util.List;
 //import resources.tm.model.BTCog;
 import resources.tm.model.BTNewCog;
 import resources.tm.model.BTNewLocal;
+import resources.tm.model.BTSkip;
 import resources.tm.model.BTAsyncInvoc;
 import resources.tm.model.BType;
 import resources.tm.model.BTAtom;
@@ -67,15 +68,25 @@ public class TmlStmtAssignment extends TmlStatement {
 			//TODO notice that arguments are treated as String
 			TmlExpAsyncInvoke tmlExpAsyncInvoke = (TmlExpAsyncInvoke)exp;
 			
-			System.out.println(tmlExpAsyncInvoke.receiver.toString());
-//			for(BTAtom cog : cogSets) {
-//				if(cog.cogId != tmlExpAsyncInvoke.receiver.toString())
-//					System.out.println("hit");
-//				else	
-//					System.out.println("miss");
-//			}
+			String callee = tmlExpAsyncInvoke.receiver.toString() ;
 			List<String> arguments = new LinkedList<String>();
-			arguments.add(tmlExpAsyncInvoke.receiver.toString()+"[TO-DO]");
+//			arguments.add(tmlExpAsyncInvoke.receiver.toString()+"["+ calleeCog.capacity + "]");
+			for(BTAtom cog : cogSets) {
+				if(cog instanceof BTNewCog){
+					if(((BTNewCog) cog).cogId.equals(callee)){
+						arguments.add(callee+"["+ ((BTNewCog) cog).capacity + "]");
+						break;	
+					}
+				} else if(cog instanceof BTNewLocal){  
+					/*
+					 * for the case where the asynchronous method call is made on the local cog
+					 */
+					if(((BTNewLocal) cog).objId.equals(callee)){
+						arguments.add(((BTNewLocal) cog).cogId+"["+ ((BTNewLocal) cog).capacity + "]");
+						break;	
+					}
+				}
+			}			
 			for(TmlExpBase e : tmlExpAsyncInvoke.arguments)
 				arguments.add(e.toString());
 						

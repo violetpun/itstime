@@ -1,10 +1,11 @@
-/*
+
 Int m(Int n) {
 	Class y = new Class with 2 ;
-	Int x = y!n1(1) ;
-  	/*job(n) ;*/
+/*	Int x = y!n1(1) ;*/
+  	job(n) ;
   	return 0 ;
 }
+
 
 Int n1(Int n) {
     Class y = new Class with thisCapacity ; 	
@@ -12,12 +13,13 @@ Int n1(Int n) {
   	return 0 ;
 }
 
+
 Int n2(Class y) {
-	Int x = y!n1(1);
+/*	Int x = y!n1(1); */
 	job(2);
 	return 0;
 }
-*/
+
 
 {
    Int x = 1 ;
@@ -25,7 +27,6 @@ Int n2(Class y) {
    Class y2 = new local Class;
    Fut<Int> f1 = y1!m(x) ;	
    Fut<Int> f2 = y2!n1(x+1) ;
-   Fut<Int> f3 = y3!n2(y1) ;
    Class y3 = new Class with 1;
-   
+   Fut<Int> f3 = y3!n2(y1) ;  
 } with 10

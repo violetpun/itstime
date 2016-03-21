@@ -66,19 +66,8 @@ public class TmlStmtSeq extends TmlStatement {
 		
 		//TODO add a try catch?
 		BTAtom atom = (BTAtom)stmts.get(0).inferBehavior(localCapacity, existingCogs);
-		if (atom instanceof BTNewCog || atom instanceof BTNewLocal){
-			existingCogs.add(atom);
-			if (atom instanceof BTNewCog){
-				System.out.println(((BTNewCog) atom).cogId);
-//				System.out.println(existingCogs.indexOf(((BTNewCog) atom).cogId.toString()));
-			}
-				
-			if(atom instanceof BTNewLocal){
-				System.out.println(((BTNewLocal) atom).cogId);
-//				System.out.println(existingCogs.indexOf(((BTNewLocal) atom).cogId.toString()));
-			}
-				
-		}			
+		if (atom instanceof BTNewCog || atom instanceof BTNewLocal)
+			existingCogs.add(atom);			
 		return new BTSequence(atom, inferBehavior(stmts.subList(1, stmts.size()), localCapacity, existingCogs));
 	}
 }
