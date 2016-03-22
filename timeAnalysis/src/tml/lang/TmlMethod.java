@@ -110,7 +110,6 @@ public class TmlMethod extends TmlElementBase {
 		if(!isMain){
 			for(TmlArgument e : arguments){
 				if(e.type.equals(Strings.TypeClass)){
-//					TmlExpBase cogCap = new TmlExpVar(e.id.toLowerCase()+"C");
 					argCogs.add(new BTCog(e.id, new TmlExpVar(e.id.toLowerCase()+"C").toBehavioralExp())) ;
 					plainArguments.add(e.id + "[" + e.id.toLowerCase() + "C]");
 				}
