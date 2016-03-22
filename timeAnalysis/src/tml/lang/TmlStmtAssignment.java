@@ -7,10 +7,10 @@ import java.util.List;
 //import resources.tm.model.BTCog;
 import resources.tm.model.BTNewCog;
 import resources.tm.model.BTNewLocal;
-import resources.tm.model.BTSkip;
 import resources.tm.model.BTAsyncInvoc;
 import resources.tm.model.BType;
 import resources.tm.model.BTAtom;
+import resources.tm.model.BTCog;
 import resources.tm.model.ValMethodCall;
 import resources.util.Strings;
 
@@ -68,33 +68,50 @@ public class TmlStmtAssignment extends TmlStatement {
 			//TODO notice that arguments are treated as String
 			TmlExpAsyncInvoke tmlExpAsyncInvoke = (TmlExpAsyncInvoke)exp;
 			
+			//Add receiver
 			String callee = tmlExpAsyncInvoke.receiver.toString() ;
 			List<String> arguments = new LinkedList<String>();
-//			arguments.add(tmlExpAsyncInvoke.receiver.toString()+"["+ calleeCog.capacity + "]");
-			for(BTAtom cog : cogSets) {
-				if(cog instanceof BTNewCog){
-					if(((BTNewCog) cog).cogId.equals(callee)){
-						arguments.add(callee+"["+ ((BTNewCog) cog).capacity + "]");
-						break;	
-					}
-				} else if(cog instanceof BTNewLocal){  
-					/*
-					 * for the case where the asynchronous method call is made on the local cog
-					 */
-					if(((BTNewLocal) cog).objId.equals(callee)){
-						arguments.add(((BTNewLocal) cog).cogId+"["+ ((BTNewLocal) cog).capacity + "]");
-						break;	
-					}
-				}
-			}			
-			for(TmlExpBase e : tmlExpAsyncInvoke.arguments)
-				arguments.add(e.toString());
-						
+			addCogToArg(arguments, callee, cogSets);
+			
+			//Add parameters
+			for(TmlExpBase e : tmlExpAsyncInvoke.arguments){
+				if (!addCogToArg(arguments, e.toString(), cogSets))
+					arguments.add(e.toString());	
+			}
+							
 			ValMethodCall call = new ValMethodCall(tmlExpAsyncInvoke.name, arguments);
 			return new BTAsyncInvoc(varId, call);
 		}else{
 			return exp.inferBehavior();
 		}
 		
+	}
+	
+	private boolean addCogToArg(List<String> arguments, String e, List<BTAtom> cogSets){
+		for(BTAtom cog : cogSets) {
+			if(cog instanceof BTNewCog){
+				if(((BTNewCog) cog).cogId.equals(e)){
+					arguments.add(e+"["+ ((BTNewCog) cog).capacity + "]");
+					return true;	
+				}
+			} else if(cog instanceof BTNewLocal){  
+				/*
+				 * for the case where the asynchronous method call is made on the local cog
+				 */
+				if(((BTNewLocal) cog).objId.equals(e)){
+					arguments.add(((BTNewLocal) cog).cogId+"["+ ((BTNewLocal) cog).capacity + "]");
+					return true;	
+				}
+			} else if(cog instanceof BTCog){  
+				/*
+				 * for the case where the asynchronous method call is made on the parameter-cog
+				 */
+				if(((BTCog) cog).cogId.equals(e)){
+					arguments.add(e+"["+ ((BTCog) cog).capacity + "]");
+					return true;	
+				}
+			}
+		}
+		return false;	
 	}
 }

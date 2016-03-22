@@ -1,21 +1,23 @@
 
 Int m(Int n) {
 	Class y = new Class with 2 ;
-/*	Int x = y!n1(1) ;*/
+	Int x = y!n1(1) ;
   	job(n) ;
   	return 0 ;
 }
 
 
 Int n1(Int n) {
-    Class y = new Class with thisCapacity ; 	
+    Class y = new Class with thisCapacity ; 
+    Int x = y!n2(this) ;	
 	job(n) ;
   	return 0 ;
 }
 
 
 Int n2(Class y) {
-/*	Int x = y!n1(1); */
+	Int x1 = y!n1(1);
+	Int x2 = this!n1(2) ; 
 	job(2);
 	return 0;
 }

@@ -161,16 +161,9 @@ public class TmlVisitorImpl
 	TmlExpBase exp = null ;	
 	if ((TmlExpBase)visit(ctx.exp()) != null) 
 		exp = (TmlExpBase)visit(ctx.exp());
-//	else if ((TmlExpBase)visit(ctx.THISCAPACITY()) != null)
-//		exp = (TmlExpBase)visit(ctx.THISCAPACITY());
     assert exp != null;
     return new TmlExpNewcog(exp);
   }
-  
-//  public TmlElementBase visitAcquire(tmlParser.AcquireContext ctx)
-//  {
-//    return new TmlExpNew();
-//  }
   
   public TmlElementBase visitComparissonExp(tmlParser.ComparissonExpContext ctx)
   {

@@ -8,6 +8,8 @@ package tml.lang;
 import java.util.LinkedList;
 import java.util.List;
 
+import resources.tm.model.BTAtom;
+import resources.tm.model.BTCog;
 import resources.tm.model.BTMethod;
 import resources.tm.model.BType;
 import resources.util.Strings;
@@ -102,15 +104,23 @@ public class TmlMethod extends TmlElementBase {
 	public BType inferBehavior() throws Exception {
 		List<String> releases = new LinkedList<String>();
 		List<String> plainArguments = new LinkedList<String>();
+		List<BTAtom> argCogs = new LinkedList<BTAtom>();
+		argCogs.add(new BTCog(Strings.CurrentCog, capacity.toBehavioralExp())) ;
 		plainArguments.add(Strings.CurrentCog + "[" + capacity + "]");
 		if(!isMain){
-			for(TmlArgument e : arguments)
-				plainArguments.add(e.id);
-			
-			return new BTMethod(name, plainArguments, body.inferBehavior(capacity), returnType, releases );
+			for(TmlArgument e : arguments){
+				if(e.type.equals(Strings.TypeClass)){
+//					TmlExpBase cogCap = new TmlExpVar(e.id.toLowerCase()+"C");
+					argCogs.add(new BTCog(e.id, new TmlExpVar(e.id.toLowerCase()+"C").toBehavioralExp())) ;
+					plainArguments.add(e.id + "[" + e.id.toLowerCase() + "C]");
+				}
+				else
+					plainArguments.add(e.id);
+			}
+			return new BTMethod(name, plainArguments, body.inferBehavior(capacity, argCogs), returnType, releases );
 		}else{
 			assert capacity != null;
-			return new BTMethod(capacity.toBehavioralExp(), body.inferBehavior(capacity));
+			return new BTMethod(capacity.toBehavioralExp(), body.inferBehavior(capacity, argCogs));
 		}
 	}
 

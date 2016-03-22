@@ -47,6 +47,7 @@ public class Strings {
 	public static final String CurrentCog = "THISCOG";
 	public static final String CurrentCap = "C";
 	public static final String thisCap = "THISCAPACITY";
+	public static final String TypeClass = "Class";
 
 	
 	

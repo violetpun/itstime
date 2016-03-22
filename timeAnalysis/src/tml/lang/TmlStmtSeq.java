@@ -22,7 +22,7 @@ import resources.tm.model.BType;
 public class TmlStmtSeq extends TmlStatement {
 
 	List<TmlStatement> stmts;
-	List<BTAtom> existingCogs = new LinkedList<BTAtom>() ;
+//	List<BTAtom> existingCogs = new LinkedList<BTAtom>() ;
 	public List<TmlStatement> getStmts() {
 		return stmts;
 	}
@@ -50,7 +50,7 @@ public class TmlStmtSeq extends TmlStatement {
 	 * @see tml.lang.TmlElementBase#inferBehavior()
 	 */
 	@Override
-	public BType inferBehavior(TmlExpBase localCapacity) throws Exception {
+	public BType inferBehavior(TmlExpBase localCapacity, List<BTAtom> existingCogs) throws Exception {
 		if(stmts.size() > 0) 
 			return inferBehavior(stmts, localCapacity, existingCogs);
 		return new BTSkip();
